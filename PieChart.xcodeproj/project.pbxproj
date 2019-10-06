@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FD4D5600234A8C29001910A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4D55FF234A8C29001910A1 /* AppDelegate.swift */; };
-		FD4D5602234A8C29001910A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4D5601234A8C29001910A1 /* SceneDelegate.swift */; };
 		FD4D5604234A8C29001910A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4D5603234A8C29001910A1 /* ViewController.swift */; };
 		FD4D5607234A8C29001910A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD4D5605234A8C29001910A1 /* Main.storyboard */; };
 		FD4D5609234A8C2A001910A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD4D5608234A8C2A001910A1 /* Assets.xcassets */; };
@@ -32,7 +31,6 @@
 /* Begin PBXFileReference section */
 		FD4D55FC234A8C29001910A1 /* PieChart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PieChart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4D55FF234A8C29001910A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FD4D5601234A8C29001910A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FD4D5603234A8C29001910A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FD4D5606234A8C29001910A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD4D5608234A8C2A001910A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 			children = (
 				FD4D5621234A8C42001910A1 /* Chart */,
 				FD4D55FF234A8C29001910A1 /* AppDelegate.swift */,
-				FD4D5601234A8C29001910A1 /* SceneDelegate.swift */,
 				FD4D5603234A8C29001910A1 /* ViewController.swift */,
 				FD4D5605234A8C29001910A1 /* Main.storyboard */,
 				FD4D5608234A8C2A001910A1 /* Assets.xcassets */,
@@ -222,7 +219,6 @@
 				FD4D5604234A8C29001910A1 /* ViewController.swift in Sources */,
 				FD4D5600234A8C29001910A1 /* AppDelegate.swift in Sources */,
 				FD4D5625234A8C91001910A1 /* PieChartDataSet.swift in Sources */,
-				FD4D5602234A8C29001910A1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J43DUNNNU5;
 				INFOPLIST_FILE = PieChart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -392,7 +389,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lambdatech.PieChart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -403,6 +400,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J43DUNNNU5;
 				INFOPLIST_FILE = PieChart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -410,7 +408,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lambdatech.PieChart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
