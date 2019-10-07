@@ -35,7 +35,7 @@ class LambdaPieChart : UIView {
         self.initialize()
     }
     
-    func percentToRadian(_ percent: CGFloat) -> CGFloat {
+    private func percentToRadian(_ percent: CGFloat) -> CGFloat {
         var angle = 270 + percent * 360
         if angle >= 360 {
             angle -= 360
@@ -48,51 +48,55 @@ class LambdaPieChart : UIView {
         self.data = data
         let totalValue = self.data.map { $0.percent }.reduce(0, +)
         self.data = self.data.map { return PieChartDataSet(percent: $0.percent / totalValue, colors: $0.colors) }
-    
-       
-        currentValue = 0.0
-        chartContainer.layer.sublayers = nil
-        currentAnimationIndex = 0
-        self.layers.removeAll()
-       
-        
-        for item in self.data {
-            let height : CGFloat = (chartContainer.bounds.height * 0.6)
-            let radius =   (height / 2) +  ((chartContainer.frame.size.width * 2) / (8 * height))
-            let arcCenter = chartContainer.center
-            
-            let path = UIBezierPath(arcCenter: arcCenter,
-                                    radius: radius,
-                                    startAngle: percentToRadian(currentValue),
-                                    endAngle: percentToRadian(currentValue + item.percent),
-                                    clockwise: true)
-            
-            let arcLayer = CAShapeLayer()
-            arcLayer.path = path.cgPath
-            arcLayer.fillColor = nil
-            arcLayer.strokeColor = UIColor.green.cgColor
-            arcLayer.lineWidth =  radius * lineWidth
-            arcLayer.strokeEnd = 1
-            
-            let gradientLayer = CAGradientLayer()
-            gradientLayer.frame = CGRect(x: 0, y: 0, width: chartContainer.bounds.size.width, height: chartContainer.bounds.size.height)
-            gradientLayer.colors = item.colors.map({ return $0.cgColor }).reversed()
-            gradientLayer.locations = [0.0,0.65]
-            chartContainer.layer.addSublayer(gradientLayer)
-            gradientLayer.mask = arcLayer
-            currentValue += item.percent
-            self.layers.append(arcLayer)
-            arcLayer.isHidden = true
-            
-            
-            
-            
-        }
+        drawChart()
         animateChart()
         
     }
     
-    func animateChart(){
+    private func drawChart(){
+         currentValue = 0.0
+         chartContainer.layer.sublayers = nil
+         currentAnimationIndex = 0
+         self.layers.removeAll()
+        
+         
+         for item in self.data {
+             let height : CGFloat = (chartContainer.bounds.height * 0.6)
+             let radius =   (height / 2) +  ((chartContainer.frame.size.width * 2) / (8 * height))
+             let arcCenter = chartContainer.center
+             
+             let path = UIBezierPath(arcCenter: arcCenter,
+                                     radius: radius,
+                                     startAngle: percentToRadian(currentValue),
+                                     endAngle: percentToRadian(currentValue + item.percent),
+                                     clockwise: true)
+             
+             let arcLayer = CAShapeLayer()
+             arcLayer.path = path.cgPath
+             arcLayer.fillColor = nil
+             arcLayer.strokeColor = UIColor.green.cgColor
+             arcLayer.lineWidth =  radius * lineWidth
+             arcLayer.strokeEnd = 1
+             
+             let gradientLayer = CAGradientLayer()
+             gradientLayer.frame = CGRect(x: 0, y: 0, width: chartContainer.bounds.size.width, height: chartContainer.bounds.size.height)
+             gradientLayer.colors = item.colors.map({ return $0.cgColor }).reversed()
+             gradientLayer.locations = [0.0,0.65]
+             chartContainer.layer.addSublayer(gradientLayer)
+             gradientLayer.mask = arcLayer
+             currentValue += item.percent
+             self.layers.append(arcLayer)
+             arcLayer.isHidden = true
+             
+             
+             
+             
+         }
+        
+    }
+    
+    
+    private func animateChart(){
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.duration = CFTimeInterval(self.data[currentAnimationIndex].percent / 1.0 * animationDuration)
         animation.fromValue = 0
