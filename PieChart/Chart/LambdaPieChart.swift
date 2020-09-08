@@ -35,13 +35,6 @@ class LambdaPieChart : UIView {
         self.initialize()
     }
     
-    private func percentToRadian(_ percent: CGFloat) -> CGFloat {
-        var angle = 270 + percent * 360
-        if angle >= 360 {
-            angle -= 360
-        }
-        return angle * CGFloat.pi / 180.0
-    }
     
     
     func addChartData (data : [PieChartDataSet]!){
@@ -54,44 +47,54 @@ class LambdaPieChart : UIView {
     }
     
     private func drawChart(){
-         currentValue = 0.0
-         chartContainer.layer.sublayers = nil
-         currentAnimationIndex = 0
-         self.layers.removeAll()
+        currentValue = 0.0
+        var startAngle : CGFloat = 1.5 * CGFloat.pi
         
-         
-         for item in self.data {
-             let height : CGFloat = (chartContainer.bounds.height * 0.6)
-             let radius =   (height / 2) +  ((chartContainer.frame.size.width * 2) / (8 * height))
-             let arcCenter = chartContainer.center
-             
-             let path = UIBezierPath(arcCenter: arcCenter,
-                                     radius: radius,
-                                     startAngle: percentToRadian(currentValue),
-                                     endAngle: percentToRadian(currentValue + item.percent),
-                                     clockwise: true)
-             
-             let arcLayer = CAShapeLayer()
-             arcLayer.path = path.cgPath
-             arcLayer.fillColor = nil
-             arcLayer.strokeColor = UIColor.green.cgColor
-             arcLayer.lineWidth =  radius * lineWidth
-             arcLayer.strokeEnd = 1
-             
-             let gradientLayer = CAGradientLayer()
-             gradientLayer.frame = CGRect(x: 0, y: 0, width: chartContainer.bounds.size.width, height: chartContainer.bounds.size.height)
-             gradientLayer.colors = item.colors.map({ return $0.cgColor }).reversed()
-             gradientLayer.locations = [0.0,0.65]
-             chartContainer.layer.addSublayer(gradientLayer)
-             gradientLayer.mask = arcLayer
-             currentValue += item.percent
-             self.layers.append(arcLayer)
-             arcLayer.isHidden = true
-             
-             
-             
-             
-         }
+        chartContainer.layer.sublayers = nil
+        currentAnimationIndex = 0
+        self.layers.removeAll()
+        
+        
+        for item in self.data {
+            let height : CGFloat = (chartContainer.bounds.height * 0.6)
+            let radius =   (height / 2) +  ((chartContainer.frame.size.width * 2) / (8 * height))
+            let arcCenter = chartContainer.center
+            
+            let angle : CGFloat = (item.percent / 1.0) * 2 * CGFloat.pi
+            let endAngle : CGFloat = startAngle + angle
+            
+            print(startAngle)
+            print(endAngle)
+            let path = UIBezierPath(arcCenter: arcCenter,
+                                    radius: radius,
+                                    startAngle: startAngle,
+                                    endAngle: endAngle,
+                                    clockwise: true)
+            startAngle = endAngle
+            let arcLayer = CAShapeLayer()
+            // if currentValue <= 1.0 {
+            arcLayer.path = path.cgPath
+            //}
+            
+            arcLayer.fillColor = nil
+            arcLayer.strokeColor = UIColor.green.cgColor
+            arcLayer.lineWidth =  radius * lineWidth
+            arcLayer.strokeEnd = 1
+            
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = CGRect(x: 0, y: 0, width: chartContainer.bounds.size.width, height: chartContainer.bounds.size.height)
+            gradientLayer.colors = item.colors.map({ return $0.cgColor }).reversed()
+            gradientLayer.locations = [0.0,0.65]
+            chartContainer.layer.addSublayer(gradientLayer)
+            gradientLayer.mask = arcLayer
+            currentValue += item.percent
+            self.layers.append(arcLayer)
+            arcLayer.isHidden = true
+            
+            
+            
+            
+        }
         
     }
     
@@ -123,5 +126,3 @@ extension LambdaPieChart: CAAnimationDelegate {
         }
     }
 }
-
-

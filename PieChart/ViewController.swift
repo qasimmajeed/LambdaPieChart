@@ -29,7 +29,7 @@ class ViewController: UIViewController {
             PieChartDataSet(percent: 20, colors: [UIColor.purpleishBlueThree,UIColor.brightLilac]),
             PieChartDataSet(percent: 20, colors: [UIColor.darkishPink,UIColor.lightSalmon]),
             PieChartDataSet(percent: 20, colors: [UIColor.dustyOrange,UIColor.lightMustard]),
-            PieChartDataSet(percent: 2, colors: [UIColor.greenyBlue,UIColor.hospitalGreen])
+            PieChartDataSet(percent: 0.5, colors: [UIColor.greenyBlue,UIColor.hospitalGreen])
             
         ])
     }
