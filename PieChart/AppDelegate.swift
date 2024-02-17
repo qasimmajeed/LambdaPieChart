@@ -6,7 +6,7 @@
 //  Copyright © 2019 Lambda Tech. All rights reserved.
 //
 
-import UIKit
+import UIKit//
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
